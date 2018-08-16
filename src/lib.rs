@@ -1,5 +1,7 @@
 #![feature(use_extern_macros)]
 
+#[macro_use]
+extern crate cfg_if;
 extern crate wasm_bindgen;
 
 mod utils;
