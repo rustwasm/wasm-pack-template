@@ -1,3 +1,5 @@
+use cfg_if::cfg_if;
+
 cfg_if! {
     // When the `console_error_panic_hook` feature is enabled, we can call the
     // `set_panic_hook` function to get better error messages if we ever panic.
