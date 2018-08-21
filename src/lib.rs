@@ -12,5 +12,5 @@ extern {
 
 #[wasm_bindgen]
 pub fn greet() {
-    alert(&format!("Hello, {{project-name}}!"));
+    alert("Hello, {{project-name}}!");
 }
