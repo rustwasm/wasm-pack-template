@@ -22,8 +22,9 @@ matrix:
       # Having a broken Cargo.toml (in that it has curlies in fields) anywhere
       # in any of our parent dirs is problematic.
       - mv Cargo.toml Cargo.toml.tmpl
-      - cd testing && wasm-pack build
-      - cd testing && wasm-pack test --chrome --firefox --headless
+      - cd testing
+      - wasm-pack build
+      - wasm-pack test --chrome --firefox --headless
 
   # Builds on nightly.
   - rust: nightly
@@ -36,14 +37,15 @@ matrix:
     script:
       - cargo generate --git . --name testing
       - mv Cargo.toml Cargo.toml.tmpl
-      - cd testing && cargo check
-      - cd testing && cargo check --target wasm32-unknown-unknown
-      - cd testing && cargo check                                 --no-default-features
-      - cd testing && cargo check --target wasm32-unknown-unknown --no-default-features
-      - cd testing && cargo check                                 --no-default-features --features console_error_panic_hook
-      - cd testing && cargo check --target wasm32-unknown-unknown --no-default-features --features console_error_panic_hook
-      - cd testing && cargo check                                 --no-default-features --features "console_error_panic_hook wee_alloc"
-      - cd testing && cargo check --target wasm32-unknown-unknown --no-default-features --features "console_error_panic_hook wee_alloc"
+      - cd testing
+      - cargo check
+      - cargo check --target wasm32-unknown-unknown
+      - cargo check                                 --no-default-features
+      - cargo check --target wasm32-unknown-unknown --no-default-features
+      - cargo check                                 --no-default-features --features console_error_panic_hook
+      - cargo check --target wasm32-unknown-unknown --no-default-features --features console_error_panic_hook
+      - cargo check                                 --no-default-features --features "console_error_panic_hook wee_alloc"
+      - cargo check --target wasm32-unknown-unknown --no-default-features --features "console_error_panic_hook wee_alloc"
 
   # Builds on beta.
   - rust: beta
@@ -56,11 +58,12 @@ matrix:
     script:
       - cargo generate --git . --name testing
       - mv Cargo.toml Cargo.toml.tmpl
-      - cd testing && cargo check
-      - cd testing && cargo check --target wasm32-unknown-unknown
-      - cd testing && cargo check                                 --no-default-features
-      - cd testing && cargo check --target wasm32-unknown-unknown --no-default-features
-      - cd testing && cargo check                                 --no-default-features --features console_error_panic_hook
-      - cd testing && cargo check --target wasm32-unknown-unknown --no-default-features --features console_error_panic_hook
+      - cd testing
+      - cargo check
+      - cargo check --target wasm32-unknown-unknown
+      - cargo check                                 --no-default-features
+      - cargo check --target wasm32-unknown-unknown --no-default-features
+      - cargo check                                 --no-default-features --features console_error_panic_hook
+      - cargo check --target wasm32-unknown-unknown --no-default-features --features console_error_panic_hook
       # Note: no enabling the `wee_alloc` feature here because it requires
       # nightly for now.
