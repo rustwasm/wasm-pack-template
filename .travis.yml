@@ -7,6 +7,9 @@ matrix:
   # Builds with wasm-pack.
   - rust: beta
     env: RUST_BACKTRACE=1
+    addons:
+      firefox: latest
+      chrome: stable
     before_script:
       - (test -x $HOME/.cargo/bin/cargo-install-update || cargo install cargo-update)
       - (test -x $HOME/.cargo/bin/cargo-generate || cargo install --vers "^0.2" cargo-generate)
@@ -15,6 +18,7 @@ matrix:
     script:
       - cargo generate --git . --name testing
       - cd testing && wasm-pack build
+      - cd testing && wasm-pack test --chrome --firefox --headless
 
   # Builds on nightly.
   - rust: nightly
