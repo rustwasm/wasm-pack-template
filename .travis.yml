@@ -1,6 +1,8 @@
 language: rust
 sudo: false
 
+cache: cargo
+
 matrix:
   include:
 
@@ -17,6 +19,9 @@ matrix:
       - curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
     script:
       - cargo generate --git . --name testing
+      # Having a broken Cargo.toml (in that it has curlies in fields) anywhere
+      # in any of our parent dirs is problematic.
+      - mv Cargo.toml Cargo.toml.tmpl
       - cd testing && wasm-pack build
       - cd testing && wasm-pack test --chrome --firefox --headless
 
@@ -30,6 +35,7 @@ matrix:
       - rustup target add wasm32-unknown-unknown
     script:
       - cargo generate --git . --name testing
+      - mv Cargo.toml Cargo.toml.tmpl
       - cd testing && cargo check
       - cd testing && cargo check --target wasm32-unknown-unknown
       - cd testing && cargo check                                 --no-default-features
@@ -49,6 +55,7 @@ matrix:
       - rustup target add wasm32-unknown-unknown
     script:
       - cargo generate --git . --name testing
+      - mv Cargo.toml Cargo.toml.tmpl
       - cd testing && cargo check
       - cd testing && cargo check --target wasm32-unknown-unknown
       - cd testing && cargo check                                 --no-default-features
