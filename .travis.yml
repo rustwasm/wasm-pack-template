@@ -19,6 +19,7 @@ matrix:
       - cargo install-update -a
       - curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh -s -- -f
     script:
+      - pwd
       - cargo generate --git . --name testing
       # Having a broken Cargo.toml (in that it has curlies in fields) anywhere
       # in any of our parent dirs is problematic.
