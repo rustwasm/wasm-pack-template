@@ -1,6 +1,7 @@
 mod utils;
 
 use wasm_bindgen::prelude::*;
+pub use utils::set_panic_hook;
 
 #[wasm_bindgen]
 extern "C" {
